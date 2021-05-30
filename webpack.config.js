@@ -6,7 +6,7 @@ const config = {
   entry: {
     index: [
       '@babel/polyfill',
-      './front_end/index.js'
+      './react/index.js'
     ]
   },
   output: {

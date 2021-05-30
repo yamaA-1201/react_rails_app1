@@ -9,7 +9,7 @@ COPY Gemfile $HOME
 COPY Gemfile.lock $HOME
 
 RUN apk update \
-  && apk add --no-cache build-base tzdata libxml2-dev libxslt-dev sqlite-dev nodejs \
+  apk add --update --no-cache less&& apk add --no-cache build-base tzdata libxml2-dev libxslt-dev sqlite-dev nodejs \
   && bundle install
 
 EXPOSE 3000

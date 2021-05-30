@@ -1,0 +1,49 @@
+exit
+Material.create(product_id: 1,name:'aaa',cost: 122,volume: 1,note:'a')
+exit
+Material.create(product_id: 1,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.all
+exit
+Product.last
+exit
+Product.find_by(last)
+exit
+Product.destroy_all
+Product.all
+exit
+Product.all
+exit
+Product.find_by(last)
+Material.all
+Product.all
+Material.all
+Product.all 
+Product.create(name:'a')
+Product.all 
+Products.all 
+Product.all 
+Product.all
+exit
+Product.create(name:'test',price:12.1,material_cost:13.1,category:'test')
+Product.all
+exit
+Product.destroy_all
+Product.create(name:'test',price:12.1,material_cost:13.1,category:'test')
+Product.create(name:'test2',price:12.1,material_cost:13.1,category:'test')
+Product.create(name:'test3',price:12.1,material_cost:13.1,category:'test')
+exit
+Material.all
+Material.create(product_id: 1,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.create(product_id: 30,name:'aaa',cost: 122,volume: 1,note:'a')
+exit
+Material.create(product_id: 30,name:'aaa',cost: 122,volume: 1,note:'a')
+exit
+Material.create(product_id: 30,name:'aaa',cost: 122,volume: 1,note:'a')
+exit
+Material.create(product_id: 30,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.create(product_id:30,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.create(product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.create(id:1,product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.create(,product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
+Material.create(product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
+exit

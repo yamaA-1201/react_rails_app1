@@ -1,5 +1,3 @@
-React+Redux+TypeScript課題の環境構築済レポジトリ
-
 ## rails起動（Docker）
 ### 初回起動
 `docker-compose up`

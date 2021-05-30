@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price: 1.5
+  material_cost: 1.5
+  category: MyString
+  avatar_path: MyString
+
+two:
+  name: MyString
+  price: 1.5
+  material_cost: 1.5
+  category: MyString
+  avatar_path: MyString

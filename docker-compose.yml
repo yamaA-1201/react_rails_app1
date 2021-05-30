@@ -3,7 +3,7 @@ version: '3'
 services:
   rails:
     build: .
-    container_name: sales_rails
+    container_name: react_rails2
     tty: true
     stdin_open: true
     ports:

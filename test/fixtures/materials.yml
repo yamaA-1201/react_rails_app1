@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: 
+  cost: 1.5
+  volume: 1.5
+  total_cost: 1.5
+  note: MyText
+
+two:
+  product: 
+  cost: 1.5
+  volume: 1.5
+  total_cost: 1.5
+  note: MyText
