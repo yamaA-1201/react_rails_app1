@@ -41,35 +41,28 @@ module Resources
           )
         
          end
-
-                  # POST http://localhost:3000/api/v1/products/search?
-                  desc 'search product'
-                  params do 
-                    requires :id, type: Integer, desc: 'product id'
-                      requires :name,        type: String ,  desc:'product_name'
-                      requires :price,         type: String,   desc:'price'
-                      requires :material_cost,   type:String,     desc:'float'
-                      optional :category,          type:String,   desc:'category'
-                      optional :avatar_path,       type:String,    desc:'carrierwave'
-                  end
-                  get :search do
-                  present Product.find_by(
-        
-                     name: params[:name],
-                     price: params[:price],
-                     material_cost: params[:material_cost],
-                     category: params[:category],
-                   ),with: Entities::V1::ProductEntity
-                 
-                  end
-        # PUT http://localhost:3000/api/v1/products/create
+        # PUT http://localhost:3000/api/v1/products/edit
          desc "edit product"
-          put ':id' do
-            @product = Product.find_by(id: params[:id])
-            Product.update(product_params)
+         params do 
+          #requires: 必ず取得しないといけないもの
+          #optional: nilでも問題ないもの
+             requires :id,        type: Integer, desc: 'product id'
+             requires :name,        type: String ,  desc:'product_name'
+             requires :price,         type: String,   desc:'price'
+             requires :material_cost,   type:String,     desc:'cost'
+             optional :category,          type:String,     desc:'category'
+             optional :avatar_path,         type:String,      desc:'carrierwave'
+         end
+          put :edit do
+            @Product = Product.find(id: params[:id])
+            @Product.update( 
+              name: params[:name],
+              price: params[:price],
+              material_cost: params[:material_cost],
+              category: params[:category],)
               if @product.save!
     
-                present @product, with: Entities::V1::ProductEntity
+                present @Product, with: Entities::V1::ProductEntity
               else
                 error!(I18n.t('api.errors.authentication'), 401)
 
@@ -78,15 +71,14 @@ module Resources
 
           desc "delete product"
           delete ':id' do
-            @product = Product.find_by(id: params[:id])
-            @Product
-              if @product.save!
-    
-                present @product, with: Entities::V1::ProductEntity
-              else
-                error!(I18n.t('api.errors.authentication'), 401)
+            @Product = Product.find(params[:id])
+            if @Product
+           @Product.delete
+            else
+              error!(I18n.t('api.errors.authentication'), 401)
 
-              end
+            end
+
           end
         
           
