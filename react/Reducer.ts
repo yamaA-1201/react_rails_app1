@@ -34,6 +34,15 @@ export const productReducer = (state = pInitialState, action: Actions) => {
         Category: action.Category,
         FormDisplay:true
       };
+    case 'PRODUCT_RESET':
+    return{
+      Productid:'', 
+      ProductName:'',
+      ProductPrice: '',
+      ProductCost: '',
+      Category: '',
+      FormDisplay:false
+    };
     default:
       return state;
   }
@@ -45,8 +54,7 @@ export type PListType={
   price:string;
   cost:string;
   category:string;
-
-}[]
+}
 
 export const PListReducer =(
   state:PListType[]=[],
@@ -61,9 +69,14 @@ export const PListReducer =(
           name:         action.Name,
           price:        action.Price,
           material_cost:action.Cost,
-          category:     action.Category
-
+          category:     action.Category,
       }]
+      case 'P_RESET_LIST_ACTION':
+        return[]
+      case 'P_DELETE_LIST_ACTION':
+        return state.filter(({id})=>
+        id !== action.id
+        )
       default:
         return state;
   }
@@ -71,7 +84,7 @@ export const PListReducer =(
 //資材
 export type MaterialRootState = {
   MaterialName:string,
-  MaterialPrice:string,
+  MaterialCost:string,
   MeterialUnit:string,
   MaterialVolume:string,
   MaterialNote:string,
@@ -80,11 +93,11 @@ export type TextType={
   id:number
   Product_id:number,
   MaterialName:string,
-  MaterialPrice:string,
+  MaterialCost:string,
   MaterialUnit:string,
   MaterialVolume:string,
   MaterialNote:string,
-}[]
+}
 export const materialReducer = (
   state:TextType[]=[],
   action:Actions)=>{
@@ -94,34 +107,24 @@ switch(action.type){
       ...state,
       {
       id:action.id,
-      Product_id:action.Product_Id,
+      Product_id:action.Product_id,
   MaterialName:   action.MaterialName,
-  MaterialPrice:  action.MaterialPrice,
+  MaterialCost:  action.MaterialCost,
   MaterialUnit:   action.MaterialUnit,
   MaterialVolume: action.MaterialVolume,
   MaterialNote:   action.MaterialNote,
     }]
+    case'MATERIAL_RESET':
+      return[]
+      case'MATERIAL_DELETE':
+      return state.filter(({id})=>
+        id !== action.id
+        )
     default:
       return state;
 }
 }
-//test
-export type testARootState = {
-  name: string;
-};
-const testAInitialState = {
-  name: '',
-};
-export const asyncReducer = (state = testAInitialState, action: Actions) => {
-  switch (action.type) {
-    case 'ASYNC_ALL_ACTION':
-      return {
-        name: action.name,
-      };
-    default:
-      return state;
-  }
-};
+
 
 export const rootReducer = (history: History) =>
   combineReducers({
@@ -129,6 +132,6 @@ export const rootReducer = (history: History) =>
     productReducer,
     PListReducer,
     materialReducer ,
-    asyncReducer,
+    
   });
 export type AllState = ReturnType<typeof store.getState>;

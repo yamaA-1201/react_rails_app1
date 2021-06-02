@@ -7,15 +7,18 @@ module Resources
         get do
           present Material.all, with: Entities::V1::MaterialEntity
         end
-
+       # GET http://localhost:3000/api/v1/materials?$product_id=${:id}
         desc 'material'
         # パラメータ設定
-         params do
-           requires :product_id, type: Integer, desc: 'material_id'
+       
+          get :show do
+          @Material= Material.where(product_id: params[:product_id])
+            if @Material
+        present @Material,with: Entities::V1::MaterialEntity
+            else
+
             end
-         get ':id' do
-           present Material.where(params[:product_id]).all,with: Entities::V1::ProductEntity
-         end
+          end
 
          # POST http://localhost:3000/api/v1/materials/create
          desc 'create material'
@@ -31,7 +34,7 @@ module Resources
          end
          post :create do
 
-          Material.create!(
+          Material.create(
             product_id: params[:product_id],
             name: params[:name],
             cost: params[:cost],
@@ -40,8 +43,6 @@ module Resources
             note: params[:note],
           )
       
-
-       
          end
           # DELETE http://localhost:3000/api/v1/materials/delete
           desc 'delete material'
@@ -61,11 +62,9 @@ module Resources
               name: params[:name],
               cost: params[:cost],
               volume: params[:volume],
-              unit: params[:unit],
-              note: params[:note],
             )
               if @Material
-              @Material.destroy
+              @Material.delete
               else
                 error!(I18n.t('api.errors.authentication'), 401)
 

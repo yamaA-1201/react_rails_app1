@@ -1,7 +1,11 @@
-import { Actions, ASYNC_ALL_ACTION, PRODUCT_ACTION,MATERIAL_ACTION, PRODUCT_LIST_ACTION } from './ActionTypes';
-import { ThunkAction } from 'redux-thunk';
-import axios from 'axios';
-import { AllState } from '../Reducer';
+import { 
+  PRODUCT_ACTION,MATERIAL_ACTION, 
+  PRODUCT_LIST_ACTION,
+  PRODUCT_RESET,
+  MATERIAL_RESET,
+  MATERIAL_DELETE,
+  P_DELETE_LIST_ACTION, 
+  P_RESET_LIST_ACTION} from './ActionTypes';
 
 //商品
 export const ProductAction = (
@@ -18,13 +22,31 @@ export const ProductAction = (
   ProductCost,
   Category,
 });
+
+export const ProductReset=(
+
+)=>({
+  type:'PRODUCT_RESET' as typeof PRODUCT_RESET,
+
+})
+export const P_ResetListAction=(
+
+  )=>({
+    type:'P_RESET_LIST_ACTION' as typeof P_RESET_LIST_ACTION,
+  
+  })
+export const MaterialReset=()=>({
+type:'MATERIAL_RESET' as typeof MATERIAL_RESET,
+})
+
 let P_Id:number = 0;
 export const ProductListAction=(
   ProductId:number,
   Name:string,
   Price:string,
   Cost:string,
-  Category:string)=>({
+  Category:string,
+  )=>({
  type: 'PRODUCT_LIST_ACTION' as typeof PRODUCT_LIST_ACTION,
  ProductId,
  Name,
@@ -33,44 +55,31 @@ export const ProductListAction=(
  Category,
  id:P_Id++
 })
+export const P_DeleteAction=(id:number)=>({
+  type:'P_DELETE_LIST_ACTION' as typeof P_DELETE_LIST_ACTION,
+  id:id
+  })
 //資材
 let nextId:number = 0;
 export const MaterialAction = (
-  Product_Id:number,
+  Product_id:number,
   MaterialName:string,
-  MaterialPrice:string,
+  MaterialCost:string,
   MaterialUnit:string,
   MaterialVolume:string,
   MaterialNote:string,
 ) => ({
   type: 'MATERIAL_ACTION' as typeof MATERIAL_ACTION,
-  Product_Id,
+  Product_id,
   MaterialName,
-  MaterialPrice,
+  MaterialCost,
   MaterialUnit,
   MaterialVolume,
   MaterialNote,
   id:nextId++
 })
+export const MaterialDeleteAction=(id:number)=>({
+type:'MATERIAL_DELETE' as typeof MATERIAL_DELETE,
+id:id
+})
 
-// シンクテスト参考用
-export const AsyncAllAction = (name: string) => ({
-  type: 'ASYNC_ALL_ACTION' as typeof ASYNC_ALL_ACTION,
-  name,
-});
-export const AsyncAll = (): ThunkAction<
-  void,
-  AllState,
-  null,
-  Actions
-> => async dispatch => {
-  axios
-    .get(`http://localhost:3000/api/v1/products`)
-    .then(response => {
-      dispatch(AsyncAllAction(response.data.name));
-      console.log(response.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};

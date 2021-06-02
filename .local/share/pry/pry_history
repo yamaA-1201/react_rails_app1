@@ -47,3 +47,30 @@ Material.create(id:1,product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
 Material.create(,product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
 Material.create(product_id:29,name:'aaa',cost: 122,volume: 1,note:'a')
 exit
+Material.all
+exit
+Material.all
+Material.where(product_id: 19)
+Material.where(product_id:19)
+Material.find_by(product_id:19)
+Material.find_by(product_id:19).all
+exit
+Material.find_by(product_id:19,name:r1)
+Material.find_by(product_id:19,name:"r1")
+Material.find_by(product_id:19,name:r1,cost:11.1,Volume:1.0,unit:"none",note:"none")
+Material.find_by(product_id:19,name:"r1",cost:11.1,Volume:1.0,unit:"none",note:"none")
+Material.find_by(product_id:19,name:"r1",cost:11.1,Volume:1.0,unit:"none",note:"")
+Material.find_by(product_id:19,name:"r1",cost:11.1,Volume:1.0,unit:"none",note:"none")
+Material.find_by(product_id:19,name:"r1",cost:11.1,Volume:1.0,unit:"none",note:"")
+Material.find_by(product_id:19,name:"r1",cost:11.1,Volume:1.0,unit:"none",note:"none")
+exit
+Product.find_by(last)
+Product.find(1)
+Product.where(1)
+Product.where(id:13)
+Product.where(id:20)
+Product.create(name:"teest",price:11.1,material_cost:11.1,category:test,avatar_path:"\fakepath\DSC_0341%E3%81%AE%E3%82%B3%E3%83%92%E3%82%9A%E3%83%BC.JPG")
+Product.create(name:"teest",price:11.1,material_cost:11.1,category:"test",avatar_path:"\fakepath\DSC_0341%E3%81%AE%E3%82%B3%E3%83%92%E3%82%9A%E3%83%BC.JPG")
+Product.create(name:"test43",price:11.1,material_cost:11.1,category:"test",avatar_path:"\fakepath\DSC_0341%E3%81%AE%E3%82%B3%E3%83%92%E3%82%9A%E3%83%BC.JPG")
+Product.create(name:"test43",price:11.1,material_cost:11.1,category:"\fakepath\DSC_0341%E3%81%AE%E3%82%B3%E3%83%92%E3%82%9A%E3%83%BC.JPG",avatar_path:"\fakepath\DSC_0341%E3%81%AE%E3%82%B3%E3%83%92%E3%82%9A%E3%83%BC.JPG")
+exit

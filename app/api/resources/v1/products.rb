@@ -38,10 +38,11 @@ module Resources
             price: params[:price],
             material_cost: params[:material_cost],
             category: params[:category],
+            avatar_path: params[:avatar_path]
           )
         
          end
-        # PUT http://localhost:3000/api/v1/products/edit
+        # POST http://localhost:3000/api/v1/products/edit
          desc "edit product"
          params do 
           #requires: 必ず取得しないといけないもの
@@ -53,24 +54,30 @@ module Resources
              optional :category,          type:String,     desc:'category'
              optional :avatar_path,         type:String,      desc:'carrierwave'
          end
-          put :edit do
-            @Product = Product.find(id: params[:id])
+          post :edit do
+          @Product =Product.find(params[:id])
+           if @Product
             @Product.update( 
               name: params[:name],
               price: params[:price],
               material_cost: params[:material_cost],
-              category: params[:category],)
-              if @product.save!
-    
-                present @Product, with: Entities::V1::ProductEntity
-              else
+              category: params[:category],
+              avatar_path: paramas[:avater_path]
+
+            )
+              present Product.find(params[:id]),with: Entities::V1::ProductEntity
+
+           else
                 error!(I18n.t('api.errors.authentication'), 401)
 
               end
           end
 
           desc "delete product"
-          delete ':id' do
+          delete :delete do
+            params do
+              requires :id,        type: Integer, desc: 'product id'
+            end
             @Product = Product.find(params[:id])
             if @Product
            @Product.delete

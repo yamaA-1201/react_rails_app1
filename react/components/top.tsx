@@ -1,26 +1,43 @@
 /* eslint-disable require-jsdoc */
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { AsyncAll } from '../actions/ActionCreator';
 import { AllState,} from '../Reducer';
 import { connect } from 'react-redux';
 import { store } from '../Store';
-
-import { ProductAll, test } from '../db/api';
+import { Reset,} from '../db/api';
+import { Button } from 'reactstrap';
+import * as H from 'history'
+import  '../styles/style.scss';
+import { push } from 'connected-react-router';
 
 interface props {
+  Reset:()=>void;
+  history:H.History
 }
 
-export class Top extends React.Component<props> {
 
-  render() {
+
+export class Top extends React.Component<props> {
+     handleLink=()=>{
+      this.props.history.push("/products")
+    }
+  render() {  
+  
+// history.push("/products")
+
     return (
-      <div>
-        <h1>Mainmenu</h1>
-        <Link to="/new">新規登録</Link>
-        <button onClick={test}>通信チェック</button>
-        <Link to="/products">商品一覧</Link>
-        <a>一覧</a>
+      <div className="top" >
+        <div>
+        <header>
+        <h1 className="h1">Mainmenu</h1>
+        </header>
+      <body className='background'>
+        <Button onClick={()=>this.props.Reset()} color="success" className="Button">新規登録</Button><br></br>
+        <Button onClick={()=>{this.handleLink()}} color="success">商品一覧</Button>
+      </body>
+      <footer>
+
+      </footer>
+    </div>
       </div>
     );
   }
@@ -30,4 +47,7 @@ const mapStateToProps = (state: AllState) => ({
 
 });
 
-export default connect(mapStateToProps, { AsyncAll })(Top);
+
+export default connect(mapStateToProps, { Reset })(Top);
+
+

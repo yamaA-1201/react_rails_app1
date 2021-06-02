@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AllState, productRootState } from '../../Reducer';
-import {MaterialSubmit} from '../../db/api'
+import { AllState, productRootState } from '../../../Reducer';
+import {MaterialSubmit} from '../../../db/api'
 
 type Fprops= {
   MaterialSubmit:(
@@ -23,7 +23,7 @@ interface Formtext {
   MaterialNote: string;
   FormDisplay: boolean;
 }
-class MaterialForm extends React.Component<Fprops, Formtext> {
+class MaterialEditForm extends React.Component<Fprops, Formtext> {
 
   constructor(props: Fprops) {
     super(props);
@@ -49,13 +49,13 @@ class MaterialForm extends React.Component<Fprops, Formtext> {
     const Product_id= this.props.text.Productid
     if(FormDisplay){
     return (
-      <div className="material1">
+      <div>
 
         <form
           onSubmit={e => {
             e.preventDefault();
             this.props.MaterialSubmit(
-              Product_id,
+              this.props.text.Productid,
               MaterialName,
               MaterialCost,
               MaterialUnit,
@@ -113,8 +113,8 @@ class MaterialForm extends React.Component<Fprops, Formtext> {
     );
     }else{
       return(
-<div className="material1">
-  <span className="span">先に商品を入力してください</span>
+<div>
+  <span>先に商品を入力しください</span>
 </div>
     )}
   }
@@ -124,4 +124,4 @@ const mapStateToProps = (state: AllState) => ({
 text:state.productReducer
 });
 
-export default connect(mapStateToProps, { MaterialSubmit })(MaterialForm);
+export default connect(mapStateToProps, { MaterialSubmit })(MaterialEditForm);

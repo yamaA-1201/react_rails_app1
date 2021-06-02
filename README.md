@@ -1,13 +1,21 @@
-## rails起動（Docker）
-### 初回起動
+### 食品などの商品の原価計算アプリ
+## 使用したもの
+Docker(Rails grape)
+Typescript
+webpack-5.23.0
+# react
+react
+redux
+reactstrap
+## 作った経緯
+reactやtypescriptを勉強したのでアウトプットとして制作
+（今後もアップデート予定）
+## rails(Docker)
+## 初回起動(First start)
 `docker-compose up`
-### 2回目以降
+## 2回目以降
 `docker-compose start`
-### ログを見る
-`docker-compose logs -f`
 
-## フロントエンド
-### webpackビルド
-`npm run build`
-### フロントエンドサーバー起動
+## npm
+## サーバー起動
 `npm start`

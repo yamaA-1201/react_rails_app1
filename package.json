@@ -1,5 +1,5 @@
 {
-	"name": "react-tutorials",
+	"name": "react",
 	"version": "0.0.0",
 	"homepage": "./",
 	"description": "",
@@ -10,18 +10,18 @@
 		"connected-react-router": "^6.8.0",
 		"express": "^4.17.1",
 		"history": "^4.10.1",
+		"html-webpack-plugin": "^5.2.0",
 		"kind-of": ">=6.0.3",
 		"minimist": ">=1.2.5",
+		"popper.js": "^1.16.1",
 		"react": "^16.14.0",
-		"react-dom": "^16.13.1",
+		"react-dom": "^16.14.0",
 		"react-dropzone": "^11.2.4",
 		"react-redux": "^7.2.2",
 		"react-router": "^5.2.0",
 		"react-router-dom": "^5.2.0",
 		"redux": "^4.0.5",
-		"redux-thunk": "^2.3.0",
-		"sass": "^1.34.0",
-		"sass-loader": "^11.1.1"
+		"redux-thunk": "^2.3.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.9.0",
@@ -37,17 +37,24 @@
 		"@types/react-router-dom": "^5.1.4",
 		"@types/redux-thunk": "^2.1.0",
 		"babel-loader": "^8.1.0",
-		"css-loader": "^3.6.0",
+		"bootstrap": "^5.0.1",
+		"css-loader": "^5.2.6",
+		"file-loader": "^6.2.0",
+		"postcss-loader": "^5.3.0",
+		"reactstrap": "^8.9.0",
 		"redux-devtools-extension": "^2.13.8",
+		"sass": "^1.34.0",
+		"sass-loader": "^11.1.1",
 		"style-loader": "^2.0.0",
 		"ts-loader": "^6.2.2",
 		"typescript": "^3.8.3",
-		"webpack": "^4.42.1",
-		"webpack-cli": "^3.3.11"
+		"url-loader": "^4.1.1",
+		"webpack": "^5.23.0",
+		"webpack-cli": "^4.5.0"
 	},
 	"scripts": {
 		"start": "node server.js",
-		"build": "webpack --progress --watch ---config webpack.config.js"
+		"build": "webpack --progress --watch --config webpack.config.js"
 	},
 	"author": "",
 	"license": "ISC"

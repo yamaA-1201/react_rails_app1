@@ -5,7 +5,8 @@ log
 tmp
 .bundle
 .pry_history
-
+test.html
+test.css
 vendor
-
+PrintView.tsx
 public/index.bundle.js

@@ -1,6 +1,106 @@
+
 .top{
-    h1{
-        width: 50;
-        color: rgb(255, 255, 255);
+ h1{color: rgb(253, 253, 253);
+    text-align:center;
+    margin: auto;
+    Background-color: rgba(50, 150, 66, 0.315); 
+  
     }
+ 
+      Button{
+        width: 300px;
+        height: 50px;
+        text-align: center;
+        margin: 100px auto;
+        margin-right: 380px;
+        margin-left: 380px;
+}   
+.background{
+    background-image:url(../image/pumpkin-1768857_1920.jpg);  /* 画像のURLを指定       */
+    background-repeat:  no-repeat;                         /* 画像の繰り返しを指定  */              
+    background-position:center center;                     /* 画像の表示位置を指定  */
+    width:100%;                                            /* 横幅のサイズを指定    */
+    height:600px;
+}
+.fotter{
+    Background-color: rgba(50, 150, 66, 0.315); 
+
+}
+}
+.printview{
+    h1{ text-align:center;
+    }
+    table{border: 1mm solid black;
+        width:172mm;
+        height:251mm;
+        margin: auto;
+    }
+    th{border: 3px solid black;
+        text-align: center;
+    }
+    td{border: 1px solid black;
+        text-align: center;}
+}
+.new{
+    .header{
+        color: rgb(253, 253, 253);
+        Background-color: rgba(50, 150, 66, 0.315); 
+    }
+    .table{
+        border: 1mm solid black;
+        width: 200px;
+    }
+    th{border: 3px solid black;
+      
+    }
+    td{border: 1px solid black;
+      }
+}
+.edit{
+    header{
+        color: rgb(253, 253, 253);
+        Background-color: rgba(50, 150, 66, 0.315); 
+    }
+    table{
+        border: 1mm solid black;
+        width: 200px;
+    }
+    th{border: 3px solid black;
+      
+    }
+    td{border: 1px solid black;
+      }
+}
+.material1{
+    .span{
+        margin: 400px;
+        text-align: center;}
+}
+.products{
+    header{
+        Background-color: rgba(50, 150, 66, 0.315); 
+    }
+    .Card{
+        list-style:none;
+        float: right;
+        row-gap: 5;
+        width: 200px;
+
+    margin: auto;
+    }
+    Button{
+        color: rgb(253, 253, 253);
+
+        margin: auto;
+        padding: 1px;
+        width: 150px;
+        height: 30px;
+    }
+}
+.show{
+    header{
+        color: rgb(253, 253, 253);
+        Background-color: rgba(50, 150, 66, 0.315); 
+    }
+    margin: auto;
 }

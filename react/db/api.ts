@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Action } from 'redux';
-import { MaterialAction, ProductAction, ProductListAction } from '../actions/ActionCreator';
+import { MaterialAction, MaterialDeleteAction, MaterialReset, ProductAction, ProductListAction, ProductReset, P_ResetListAction } from '../actions/ActionCreator';
 import { Actions } from 'react/actions/ActionTypes';
 import { AllState } from 'react/Reducer';
 import { ThunkAction } from 'redux-thunk'
@@ -8,11 +8,6 @@ import { push } from 'connected-react-router';
 
 //---Product---
 //all
-//--test--
-
-
-
-//--test--
 export const ProductAll = (): ThunkAction<
   void,
   AllState,
@@ -27,7 +22,8 @@ export const ProductAll = (): ThunkAction<
         response.data[i].name,
         response.data[i].price,
         response.data[i].cost,
-        response.data[i].category))
+        response.data[i].category,
+     ))
        }
     
       })
@@ -36,6 +32,23 @@ export const ProductAll = (): ThunkAction<
       });
 
   }
+export const Reset=(): ThunkAction<void,AllState,null,Action> => async dispatch=>{
+if (dispatch(ProductReset())){
+  dispatch(MaterialReset())
+dispatch(push("/new"))
+
+}else{return}
+
+  }
+  //Products only
+  export const Reset2=(): ThunkAction<void,AllState,null,Action> => async dispatch=>{
+    if (dispatch(ProductReset())){
+      dispatch(P_ResetListAction())
+      dispatch(MaterialReset())
+     
+    }else{return}
+    
+      }
 //product_find
 export const ProductFind= (ProductId:number): ThunkAction<
 void,
@@ -52,12 +65,28 @@ null
         console.log(err);
       });
 }
+//show
+export const ProductShow= (ProductId:number): ThunkAction<
+void,
+AllState,
+null
+, Action> => async dispatch => {
+  axios.get(`http://localhost:3000/api/v1/products/${ProductId}`)
+      .then(response => {
+        //console.log(response.data.name)
+        dispatch(ProductAction(response.data.id, response.data.name, response.data.price, response.data.cost, response.data.category))
+        dispatch(push("/show"))
+      })
+      .catch(err => {
+        console.log(err);
+      });
+}
 //create
 export const ProductSubmit = (
   ProductName: string,
   ProductPrice: string,
   ProductCost: string,
-  Category: string
+  Category: string,
 ): ThunkAction<
   void,
   AllState,
@@ -66,7 +95,13 @@ export const ProductSubmit = (
     axios.post(`http://localhost:3000/api/v1/products/create?name=${ProductName}&price=${ProductPrice}&material_cost=${ProductCost}&category=${Category}`)
       .then(response => {
         console.log(response.data)
-        dispatch(ProductAction(response.data.id, ProductName, ProductPrice, ProductCost, Category))
+        dispatch(ProductAction(
+          response.data.id, 
+          ProductName, 
+          ProductPrice, 
+          ProductCost, 
+          Category,
+          ))
       
       })
       .catch(err => {
@@ -78,32 +113,60 @@ export const ProductSubmit = (
 
 //edit
 
-export const ProductEdit = (): ThunkAction<
+export const ProductEdit = (
+  ProductId:number,
+  ProductName: string,
+  ProductPrice: string,
+  ProductCost: string,
+  Category: string,
+  Image:string
+): ThunkAction<
   void,
   AllState,
   null
   , Actions> => async dispatch => {
-    axios.put('http://localhost:3000/api/v1/products')
+    axios.post(`http://localhost:3000/api/v1/products/edit?id=${ProductId}&name=${ProductName}&price=${ProductPrice}&material_cost=${ProductCost}&category=${Category}`)
       .then(response => {
-        dispatch(ProductAction(response.data.Productid, response.data.ProductName,
-          response.data.ProductPrice,
-          response.data.ProductCost,
-          response.data.Category))
+        console.log(response.data)
+        dispatch(ProductAction(
+          response.data.id, 
+          ProductName,
+          ProductPrice,
+          ProductCost,
+          Category,
+          ))
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-//delete
-export const ProductDelete = (): ThunkAction<
+  export const ProductShowEdit= (ProductId:number): ThunkAction<
   void,
   AllState,
   null
-  , Actions> => async dispatch => {
-    axios.delete('http://localhost:3000/api/v1/products')
+  , Action> => async dispatch => {
+    axios.get(`http://localhost:3000/api/v1/products/${ProductId}`)
+        .then(response => {
+          console.log(response.data.id)
+          dispatch(ProductAction(response.data.id, response.data.name, response.data.price, response.data.cost, response.data.category))
+          dispatch(push("/edit"))
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  }
+//delete
+export const ProductDelete = (ProductId:number,id:number): ThunkAction<
+void,
+AllState,
+null
+, Action> => async dispatch => {
+    axios.delete(`http://localhost:3000/api/v1/products/delete?id=${ProductId}`)
       .then(response => {
-        dispatch(console.log)
+        console.log(`deleted product at id:${ProductId}`)
+        location.reload()
+
       })
       .catch(err => {
         console.log(err);
@@ -112,70 +175,50 @@ export const ProductDelete = (): ThunkAction<
 //---Material---
 //create
 export const MaterialSubmit = (
-  Product_Id:number,
+  Product_id:number,
   MaterialName: string,
-  MaterialPrice: string,
+  MaterialCost: string,
   MaterialUnit: string,
   MaterialVolume: string,
-  MaterialNote: string): ThunkAction<
+  MaterialNote: string
+  ): ThunkAction<
     void,
     AllState,
     null
     , Actions> => async dispatch => {
-      axios.post(`http://localhost:3000/api/v1/materials/create?product_id=${Product_Id}&name=${MaterialName}&cost=${MaterialUnit}&volume=${MaterialVolume}&note=${MaterialNote}`)
+      axios.post(`http://localhost:3000/api/v1/materials/create?product_id=${Product_id}&name=${MaterialName}&cost=${MaterialCost}&volume=${MaterialVolume}&unit=${MaterialUnit}&note=${MaterialNote}`)
         .then(response => {
           dispatch(MaterialAction(
             response.data.id,
-            response.data.MaterialName,
-            response.data.MaterialPrice,
-            response.data. MaterialUnit,
-            response.data.MaterialVolume,
-            response.data.MaterialNote,
-          ))
-          console.log(
-            response.data.id,
-            MaterialName,
-            MaterialPrice,
+            response.data.name,
+            MaterialCost,
             MaterialUnit,
             MaterialVolume,
-            MaterialNote,)
+            MaterialNote,
+          ))
         })
         .catch(err => {
           console.log(err);
         });
     };
-//edit
-export const MaterialEdit = (): ThunkAction<
-  void,
-  AllState,
-  null
-  , Actions> => async dispatch => {
-    axios.put('http://localhost:3000/api/v1/materials')
-      .then(response => {
-        dispatch(MaterialAction(
-          response.data.id,
-          response.data.MaterialName,
-          response.data.MaterialPrice,
-          response.data.MaterialUnit,
-          response.data.MaterialVolume,
-          response.data.MaterialNote,
-        ))
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
-export const MaterialDelete = (): ThunkAction<
+export const MaterialDelete = (
+  Product_id:number,
+  MaterialName: string,
+  MaterialCost: string,
+  MaterialVolume: string,
+  id:number
+): ThunkAction<
   void,
   AllState,
   null
   , Actions> => async dispatch => {
-    axios.delete('http://localhost:3000/api/v1/material')
+    axios.delete(`http://localhost:3000/api/v1/materials/delete?product_id=${Product_id}&name=${MaterialName}&cost=${MaterialCost}&volume=${MaterialVolume}`)
       .then(response => {
-        dispatch(console.log)
+        dispatch(MaterialDeleteAction(id))
       })
       .catch(err => {
+        console.log(Product_id,MaterialName,MaterialCost,MaterialVolume)
         console.log(err);
       });
   };

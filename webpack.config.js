@@ -1,5 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const loader = require('sass-loader');
 
 const config = {
   mode: 'development',
@@ -41,18 +43,45 @@ const config = {
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' }
+           'style-loader',
+           'css-loader' 
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+            },
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        loader:'url-loader',
+        options:{
+          limit: 2408,
+          name: './image/[name].[ext]'
+        }
       },
     ]
   },
   resolve: {
-    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.css'],
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.css','.scss','sass'],
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NamedModulesPlugin()
+    //new webpack.optimize.OccurrenceOrderPlugin(),
+    //new webpack.NamedModulesPlugin()
+    new HtmlWebpackPlugin({
+      title: 'react',
+      template: path.resolve(__dirname, './react/index.html'),
+      filename: 'index.html',
+    }),
   ],
   watchOptions: {
     // ignored: /node_modules/,
