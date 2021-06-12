@@ -9,6 +9,7 @@ redux
 reactstrap
 ## 作った経緯
 reactやtypescriptを勉強したのでアウトプットとして制作
+データの登録、編集、削除が可能
 （今後もアップデート予定）
 ## rails(Docker)
 ## 初回起動(First start)

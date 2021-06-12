@@ -26,18 +26,19 @@ export class Top extends React.Component<props> {
 
     return (
       <div className="top" >
-        <div>
         <header>
         <h1 className="h1">Mainmenu</h1>
         </header>
-      <body className='background'>
+        
+        
+      <body className='background' >
         <Button onClick={()=>this.props.Reset()} color="success" className="Button">新規登録</Button><br></br>
         <Button onClick={()=>{this.handleLink()}} color="success">商品一覧</Button>
       </body>
       <footer>
 
       </footer>
-    </div>
+    
       </div>
     );
   }
